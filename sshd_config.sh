@@ -25,6 +25,7 @@ function allowPwdLogin(){
         sed -i "$ a AllowUsers $2" /etc/ssh/sshd_config
     fi
     service ssh restart
+    echo "Now set the password for the $2!"
     sudo passwd  $2
 }
 
