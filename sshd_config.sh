@@ -1,7 +1,7 @@
 #!/bin/bash
 #Program:
 #   This program configs /etc/ssh/sshd_config
-# 2016/06/07 Shujin Wu
+# 2016/06/18 Shujin Wu
 
 function addUserAsSudoer(){
     if [ -z $1 ]; then
