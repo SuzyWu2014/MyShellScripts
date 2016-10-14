@@ -32,36 +32,4 @@ docker cp 00c643502002:/home/locations-api/doej.pem doej.pem
 
 docker exec -it d15fc8c0e1fe bash
 
-curl https://192.168.99.100:8080/api/v0/locations/dining -k --user "username:password"
-curl https://192.168.99.100:8080/api/v0/locations/extension -k --user "username:password"
-curl https://192.168.99.100:8080/api/v0/locations/arcgis -k --user "username:password"
-
-curl -s -XPOST http://192.168.99.100:9200/locations/locations/_bulk --data-binary "@locations-arcgis.json"; echo
-curl -s -XPOST http://192.168.99.100:9200/locations/locations/_bulk --data-binary "@locations-extension.json"; echo
-curl -s -XPOST http://192.168.99.100:9200/locations/locations/_bulk --data-binary "@locations-dining.json"; echo
-
-docker run -p 8088:8088 -p 8089:8089 \
-      -v $PWD/keypair/doej.keystore:/home/api/locations-frontend-api/doej.keystore \
-      -v $PWD/keypair/doej.truststore:/home/api/locations-frontend-api/doej.truststore \
-      -v $PWD/location-frontend-api/configuration.yaml:/home/api/locations-frontend-api/configuration.yaml \
-      --link elasticsearch:elasticsearch -i -t \
-      --net dockerlocationapissetup_default frontend
-
-curl https://192.168.99.100:8088/api/v0/locations/a5041ecde8b53e54c7479e770825d7c1 -k --user "username:password"
-
-
-curl https://localhost:8080/api/v0/locations/dining -k --user "username:password"
-curl https://localhost:8080/api/v0/locations/extension -k --user "username:password"
-curl https://localhost:8080/api/v0/locations/arcgis -k --user "username:password"
-
-
-curl -s -XPOST http://elasticsearch:9200/locations/locations/_bulk --data-binary "@campusmap.json"; echo
-
-curl -s -XPOST http://elasticsearch:9200/locations/locations/_bulk --data-binary "@locations-arcgis.json"; echo
-curl -s -XPOST http://elasticsearch:9200/locations/locations/_bulk --data-binary "@locations-extension.json"; echo
-curl -s -XPOST http://elasticsearch:9200/locations/locations/_bulk --data-binary "@locations-dining.json"; echo
-
-
-
-curl https://localhost:8088/api/v0/locations/a5041ecde8b53e54c7479e770825d7c1 -k --user "username:password"
-
+# re-install docker for mac
